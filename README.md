@@ -1,73 +1,41 @@
-# Welcome to your Lovable project
 
-## Project info
+# KOVERLAYER Portal
 
-**URL**: https://lovable.dev/projects/62f151be-3ec2-4dda-8a46-15e31c76eaa2
+A multilingual portal built with React, TypeScript, and Tailwind CSS.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Authentication**: Azure B2C authentication system (currently mocked)
+- **Multilingual Support**: 8 languages (Italian, English, German, Spanish, Slovenian, Croatian, Chinese, Arabic)
+- **Responsive Design**: Sidebar navigation that collapses on smaller screens
+- **Modern UI**: Clean, professional interface built with Tailwind CSS
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/62f151be-3ec2-4dda-8a46-15e31c76eaa2) and start prompting.
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
 
-Changes made via Lovable will be committed automatically to this repo.
+## Languages Supported
 
-**Use your preferred IDE**
+- 🇮🇹 Italian (Italiano)
+- 🇬🇧 English
+- 🇩🇪 German (Deutsch)
+- 🇪🇸 Spanish (Español)
+- 🇸🇮 Slovenian (Slovenščina)
+- 🇭🇷 Croatian (Hrvatski)
+- 🇨🇳 Chinese (中文)
+- 🇸🇦 Arabic (العربية)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Project Structure
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `/src/components` - UI components
+- `/src/contexts` - React context providers
+- `/src/pages` - Application pages
+- `/public` - Static assets
 
-Follow these steps:
+## Demo
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/62f151be-3ec2-4dda-8a46-15e31c76eaa2) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Use the following credentials to log in:
+- Email: demo@koverlayer.com
+- Password: password
