@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import type { User, UserRole } from "@/types/auth";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -7,12 +8,7 @@ interface AuthContextType {
   login: () => Promise<void>;
   logout: () => Promise<void>;
   isLoading: boolean;
-}
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
+  canViewUser: (userId: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -30,12 +26,69 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Helper function to check if a user can view another user's data
+  const canViewUser = (targetUserId: string): boolean => {
+    if (!user) return false;
+
+    // Producer can view all
+    if (user.role === 'producer') return true;
+
+    // Reseller can view their own customers
+    if (user.role === 'reseller') {
+      // Return true if the target user is a customer with this reseller as parent
+      return user.id === targetUserId || mockUsers.some(u => 
+        u.id === targetUserId && 
+        u.role === 'customer' && 
+        u.parentId === user.id
+      );
+    }
+
+    // Customers can only view their own data
+    return user.id === targetUserId;
+  };
+
+  // Mock users for demonstration
+  const mockUsers = [
+    {
+      id: "producer1",
+      name: "Main Producer",
+      email: "producer@koverlayer.com",
+      role: 'producer' as UserRole
+    },
+    {
+      id: "reseller1",
+      name: "First Reseller",
+      email: "reseller1@example.com",
+      role: 'reseller' as UserRole,
+      parentId: "producer1"
+    },
+    {
+      id: "reseller2",
+      name: "Second Reseller",
+      email: "reseller2@example.com",
+      role: 'reseller' as UserRole,
+      parentId: "producer1"
+    },
+    {
+      id: "customer1",
+      name: "Customer One",
+      email: "customer1@example.com",
+      role: 'customer' as UserRole,
+      parentId: "reseller1"
+    },
+    {
+      id: "customer2",
+      name: "Customer Two",
+      email: "customer2@example.com",
+      role: 'customer' as UserRole,
+      parentId: "reseller1"
+    }
+  ];
+
   useEffect(() => {
     // Check if user is already authenticated
     const checkAuth = async () => {
       try {
-        // For now, we're using a mock implementation
-        // This will be replaced with Azure B2C authentication logic
         const storedUser = localStorage.getItem("koverlayer_user");
         if (storedUser) {
           setUser(JSON.parse(storedUser));
@@ -51,16 +104,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     checkAuth();
   }, []);
 
-  // Mock login/logout functions for now
+  // Mock login function - in real implementation, this would be replaced with Azure B2C
   const login = async () => {
     setIsLoading(true);
     try {
-      // Mock successful login
-      const mockUser = {
-        id: "user123",
-        name: "Test User",
-        email: "user@example.com",
-      };
+      // For demo purposes, we'll randomly select a user role
+      const mockUser = mockUsers[Math.floor(Math.random() * mockUsers.length)];
       
       localStorage.setItem("koverlayer_user", JSON.stringify(mockUser));
       setUser(mockUser);
@@ -95,6 +144,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         logout,
         isLoading,
+        canViewUser,
       }}
     >
       {children}
