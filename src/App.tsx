@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,13 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Language from "./pages/Language";
 import NotFound from "./pages/NotFound";
+import Probe from "./pages/Probe";
+import Monitoring from "./pages/Monitoring";
+import Alerts from "./pages/Alerts";
+import Vulnerabilities from "./pages/Vulnerabilities";
+import Reports from "./pages/Reports";
+import Organization from "./pages/Organization";
+import Support from "./pages/Support";
 
 const queryClient = new QueryClient();
 
@@ -73,10 +79,18 @@ const AppRoutes = () => {
         } 
       />
       <Route 
-        path="/profile" 
+        path="/probe" 
         element={
           <ProtectedRoute>
-            <Profile />
+            <Probe />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/monitoring" 
+        element={
+          <ProtectedRoute>
+            <Monitoring />
           </ProtectedRoute>
         } 
       />
@@ -89,10 +103,42 @@ const AppRoutes = () => {
         } 
       />
       <Route 
-        path="/language" 
+        path="/alerts" 
         element={
           <ProtectedRoute>
-            <Language />
+            <Alerts />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/vulnerabilities" 
+        element={
+          <ProtectedRoute>
+            <Vulnerabilities />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/reports" 
+        element={
+          <ProtectedRoute>
+            <Reports />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/organization" 
+        element={
+          <ProtectedRoute>
+            <Organization />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/support" 
+        element={
+          <ProtectedRoute>
+            <Support />
           </ProtectedRoute>
         } 
       />

@@ -1,7 +1,17 @@
 
 import React from "react";
 import { 
-  Home, Settings, User, Globe, LogOut
+  LayoutDashboard, 
+  Search, 
+  Monitor, 
+  Settings, 
+  Bell, 
+  Shield, 
+  FileText, 
+  Users, 
+  HelpCircle,
+  Globe, 
+  LogOut 
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -17,7 +27,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 export const SidebarWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -35,6 +44,18 @@ const AppSidebar = () => {
   const { t } = useLanguage();
   const { logout, user } = useAuth();
 
+  const menuItems = [
+    { path: "/dashboard", icon: LayoutDashboard, label: "sidebar.dashboard" },
+    { path: "/probe", icon: Search, label: "sidebar.probe" },
+    { path: "/monitoring", icon: Monitor, label: "sidebar.monitoring" },
+    { path: "/settings", icon: Settings, label: "sidebar.settings" },
+    { path: "/alerts", icon: Bell, label: "sidebar.alerts" },
+    { path: "/vulnerabilities", icon: Shield, label: "sidebar.vulnerabilities" },
+    { path: "/reports", icon: FileText, label: "sidebar.reports" },
+    { path: "/organization", icon: Users, label: "sidebar.organization" },
+    { path: "/support", icon: HelpCircle, label: "sidebar.support" },
+  ];
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -46,38 +67,16 @@ const AppSidebar = () => {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Dashboard">
-                <Link to="/dashboard">
-                  <Home />
-                  <span>{t("sidebar.dashboard")}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Profile">
-                <Link to="/profile">
-                  <User />
-                  <span>{t("sidebar.profile")}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Settings">
-                <Link to="/settings">
-                  <Settings />
-                  <span>{t("sidebar.settings")}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Language">
-                <Link to="/language">
-                  <Globe />
-                  <span>{t("sidebar.language")}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {menuItems.map((item) => (
+              <SidebarMenuItem key={item.path}>
+                <SidebarMenuButton asChild tooltip={t(item.label)}>
+                  <Link to={item.path}>
+                    <item.icon />
+                    <span>{t(item.label)}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
